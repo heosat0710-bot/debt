@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # GIỮ NGUYÊN nếu dùng Vite, ĐỔI THÀNH ./build nếu dùng Create React App
+          path: .output/public
 
   deploy:
     environment:
