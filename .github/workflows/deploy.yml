@@ -2,7 +2,7 @@ name: Build and Deploy React
 
 on:
   push:
-    branches: [ "main" ] # Hoặc "master" tùy thuộc vào tên nhánh chính của bạn
+    branches: [ "main" ] # Hoặc "master" nếu nhánh chính của bạn tên là master
 
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: release
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
