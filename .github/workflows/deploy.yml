@@ -2,19 +2,13 @@ name: Build and Deploy React
 
 on:
   push:
-    branches: [ "main" ] # Hoặc "master" tùy thuộc vào tên nhánh chính của bạn
+    branches: [ "main" ] # Hoặc master tùy dự án của bạn
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write # Cấp quyền ghi để tạo nhánh gh-pages
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Sử dụng Node 24 mới nhất để tránh cảnh báo lỗi hệ thống
+          node-version: 24
 
       - name: Install dependencies
         run: npm install
@@ -31,18 +25,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages Branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: .output/public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.output/public # Đẩy thẳng thư mục public này lên nhánh tĩnh
+          publish_branch: gh-pages
