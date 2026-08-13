@@ -13,6 +13,6 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
-    base: '/', // Thêm cấu hình base tĩnh vào đây để sửa lỗi đường dẫn 404
+    base: '/debt/',
   }
 });
