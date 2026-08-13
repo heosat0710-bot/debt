@@ -12,4 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    base: '/', // Thêm cấu hình base tĩnh vào đây để sửa lỗi đường dẫn 404
+  }
 });
