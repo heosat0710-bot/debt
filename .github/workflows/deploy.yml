@@ -2,7 +2,7 @@ name: Build and Deploy React
 
 on:
   push:
-    branches: [ "main" ] # Hoặc "master" nếu nhánh chính của bạn tên là master
+    branches: [ "main" ] # Hoặc "master" tùy thuộc vào tên nhánh chính của bạn
 
 permissions:
   contents: read
@@ -19,19 +19,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 24 # Sử dụng Node 24 mới nhất để tránh cảnh báo lỗi hệ thống
+
       - name: Install dependencies
         run: npm install
+
       - name: Build
         run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # Đổi thành ./build nếu dự án của bạn dùng Create React App
+          path: ./dist # GIỮ NGUYÊN nếu dùng Vite, ĐỔI THÀNH ./build nếu dùng Create React App
 
   deploy:
     environment:
