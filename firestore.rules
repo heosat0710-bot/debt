@@ -6,7 +6,7 @@ service cloud.firestore {
     // Sửa giá trị này khi đổi ADMIN_EMAIL, rồi deploy lại:
     //   firebase deploy --only firestore:rules
     function bootstrapAdminEmail() {
-      return "YOUR_REAL_ADMIN_EMAIL@gmail.com"; // <-- thay bằng email admin thật
+      return "heosat0710@gmail.com"; // <-- thay bằng email admin thật
     }
 
     function isSignedIn() {
