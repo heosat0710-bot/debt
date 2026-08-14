@@ -205,7 +205,7 @@ export function TransactionFlow({
           </div>
         ) : (
           <>
-            <div className="-mx-1 max-h-[45vh] overflow-y-auto">
+            <div className="-mx-1">
               {results.map((p) => (
                 <PersonRow key={p.id} person={p} txnsBalance={debtService.balanceOf(txns, p.id)} onSelect={() => setPersonId(p.id)} />
               ))}

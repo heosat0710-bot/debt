@@ -10,11 +10,11 @@ import {
 } from "@/components/GateScreens";
 import { TransactionFlow } from "@/components/TransactionFlow";
 import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import type { Txn } from "@/types";
 import { LayoutGrid, Users, Receipt, Plus, MoreHorizontal, UserCog, CloudOff } from "lucide-react";
@@ -104,25 +104,30 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </nav>
 
-      <Drawer
+      <Sheet
         open={sheet.open}
-        onOpenChange={(o) => setSheet((s) => ({ ...s, open: o }))}
+        onOpenChange={(o: boolean) => setSheet((s) => ({ ...s, open: o }))}
       >
-        <DrawerContent className="max-h-[92vh] overflow-y-auto">
-          <DrawerHeader className="pb-2">
-            <DrawerTitle>
+        <SheetContent
+          side="bottom"
+          className="mx-auto flex h-[88dvh] max-w-lg flex-col gap-0 rounded-t-2xl p-0"
+        >
+          <SheetHeader className="shrink-0 border-b px-4 py-4 text-left">
+            <SheetTitle>
               {sheet.editing ? "Sửa giao dịch" : "Ghi nhận giao dịch"}
-            </DrawerTitle>
-          </DrawerHeader>
-          {sheet.open ? (
-            <TransactionFlow
-              initialPersonId={sheet.personId}
-              editing={sheet.editing}
-              onDone={() => setSheet({ open: false })}
-            />
-          ) : null}
-        </DrawerContent>
-      </Drawer>
+            </SheetTitle>
+          </SheetHeader>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pt-4">
+            {sheet.open ? (
+              <TransactionFlow
+                initialPersonId={sheet.personId}
+                editing={sheet.editing}
+                onDone={() => setSheet({ open: false })}
+              />
+            ) : null}
+          </div>
+        </SheetContent>
+      </Sheet>
     </SheetCtx.Provider>
   );
 }

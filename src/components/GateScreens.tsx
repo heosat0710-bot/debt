@@ -89,6 +89,16 @@ export function SetupScreen() {
   );
 }
 
+const AUTH_ERRORS: Record<string, string> = {
+  "auth/operation-not-allowed":
+    "Google Sign-In chưa được bật trong Firebase Console. Vào Authentication → Sign-in method → bật Google, rồi thử lại.",
+  "auth/unauthorized-domain":
+    "Domain này chưa nằm trong Authorized domains của Firebase. Thêm domain preview vào Authentication → Settings → Authorized domains.",
+  "auth/popup-blocked": "Trình duyệt chặn popup đăng nhập. Hãy cho phép popup rồi thử lại.",
+  "auth/popup-closed-by-user": "Bạn đã đóng cửa sổ đăng nhập.",
+  "auth/invalid-api-key": "API key Firebase không hợp lệ.",
+};
+
 export function SignInScreen() {
   const { signIn } = useApp();
   const [loading, setLoading] = useState(false);
@@ -100,11 +110,13 @@ export function SignInScreen() {
     try {
       await signIn();
     } catch (e) {
-      setError((e as Error).message || "Đăng nhập thất bại");
+      const code = (e as { code?: string }).code ?? "";
+      setError(AUTH_ERRORS[code] ?? (e as Error).message ?? "Đăng nhập thất bại");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <Screen
