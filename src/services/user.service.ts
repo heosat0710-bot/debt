@@ -11,8 +11,10 @@ import type { User as FirebaseUser } from "firebase/auth";
 import { getDb } from "@/lib/firebase";
 import type { AppUser, UserRole, UserStatus } from "@/types";
 
-// Vite chỉ expose biến có tiền tố VITE_ ra client bundle.
-const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL ?? "").toLowerCase().trim();
+// Email admin khởi tạo (phải khớp với firestore.rules).
+const ADMIN_EMAIL = (import.meta.env["VITE_ADMIN_EMAIL"] ?? "heosat0710@gmail.com")
+  .toLowerCase()
+  .trim();
 
 function toUser(id: string, d: Record<string, unknown>): AppUser {
   return {

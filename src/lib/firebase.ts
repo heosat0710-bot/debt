@@ -6,11 +6,12 @@ const CONFIG_KEY = "cn.firebase.config";
 
 const envConfig: Partial<FirebaseOptions> = {
   apiKey: import.meta.env["VITE_FIREBASE_API_KEY"],
-  authDomain: import.meta.env["VITE_FIREBASE_AUTH_DOMAIN"],
-  projectId: import.meta.env["VITE_FIREBASE_PROJECT_ID"],
-  storageBucket: import.meta.env["VITE_FIREBASE_STORAGE_BUCKET"],
-  messagingSenderId: import.meta.env["VITE_FIREBASE_MESSAGING_SENDER_ID"],
-  appId: import.meta.env["VITE_FIREBASE_APP_ID"],
+  authDomain: "my-project-355cb.firebaseapp.com",
+  projectId: "my-project-355cb",
+  storageBucket: "my-project-355cb.firebasestorage.app",
+  messagingSenderId: "336301161369",
+  appId: "1:336301161369:web:5e0ecb2ed939c1e7413108",
+  measurementId: "G-JKLS8N1KRB",
 };
 
 export function getFirebaseConfig(): FirebaseOptions | null {
